@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Tic Tac Toe</h1>
+    </header>
+    <main>
+        <div class="board"></div>
+        <button class="reset-button" onclick="resetGame()">Reset Game</button>
+        <dialog class="winner-dialog">
+            <h2>Winner</h2>
+            <p><span class="winner-name"></span> wins!</p>
+            <button class="reset-button" onclick="resetGame()">Reset Game</button>
+        </dialog>
+        <dialog class="draw-dialog">
+            <h2>Draw</h2>
+            <p>The game is a draw!</p>
+            <button class="reset-button" onclick="resetGame()">Reset Game</button>
+        </dialog>
+    </main>
+    <footer>
+        <p>Created by <a href="https://github.com/slincem">Santiago Montaño</a></p>
+    </footer>
+</body>
+<script src="game.js"></script>
+</html>
