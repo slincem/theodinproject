@@ -28,8 +28,10 @@ export default class Project {
     }
 
     updateName(name) {
-        this.name = name;
-        this.notifyChange();
+        if (name !== this.name) {
+            this.name = name;
+            this.notifyChange();
+        }
     }
 
     // Método para configurar el callback

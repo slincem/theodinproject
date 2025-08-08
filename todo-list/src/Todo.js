@@ -35,41 +35,37 @@ export default class Todo {
 
     // Métodos para actualizar propiedades del TODO
     updatePriority(newPriority) {
-        if (isValidPriority(newPriority)) {
+        if (isValidPriority(newPriority) && newPriority !== this.priority) {
             this.priority = newPriority;
             this.notifyChange();
-        } else {
+        } else if (!isValidPriority(newPriority)) {
             throw new Error(`Invalid priority: ${newPriority}. Must be one of: ${Object.values(Priority).join(', ')}`);
         }
     }
 
     updateTitle(newTitle) {
-        this.title = newTitle;
-        this.notifyChange();
+        if (newTitle !== this.title) {
+            this.title = newTitle;
+            this.notifyChange();
+        }
     }
 
     updateDescription(newDescription) {
-        this.description = newDescription;
-        this.notifyChange();
+        if (newDescription !== this.description) {
+            this.description = newDescription;
+            this.notifyChange();
+        }
     }
 
     updateDueDate(newDueDate) {
-        this.dueDate = newDueDate;
-        this.notifyChange();
+        if (newDueDate !== this.dueDate) {
+            this.dueDate = newDueDate;
+            this.notifyChange();
+        }
     }
 
     toggleCompleted() {
         this.completed = !this.completed;
-        this.notifyChange();
-    }
-
-    // Método para actualizar múltiples propiedades a la vez
-    update(newData) {
-        if (newData.title !== undefined) this.title = newData.title;
-        if (newData.description !== undefined) this.description = newData.description;
-        if (newData.dueDate !== undefined) this.dueDate = newData.dueDate;
-        if (newData.priority !== undefined) this.updatePriority(newData.priority);
-        if (newData.completed !== undefined) this.completed = newData.completed;
         this.notifyChange();
     }
 }

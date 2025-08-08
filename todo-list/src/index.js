@@ -17,7 +17,7 @@ function screenController() {
 }
 
 function showTodos(project) {
-
+    const content = document.getElementById("content");
     content.innerHTML = "";
 
     const backBtn = document.createElement("button");
@@ -69,27 +69,24 @@ function showTodos(project) {
 function addTodoListeners(todoElement, todo, project) {
     todoElement.querySelector(".todo-title").addEventListener("blur", () => {
         todo.updateTitle(todoElement.querySelector(".todo-title").value);
-        showTodos(project);
     });
 
     todoElement.querySelector(".todo-description").addEventListener("blur", () => {
         todo.updateDescription(todoElement.querySelector(".todo-description").value);
-        showTodos(project);
     });
 
     todoElement.querySelector(".todo-due-date").addEventListener("blur", () => {
         todo.updateDueDate(todoElement.querySelector(".todo-due-date").value);
-        showTodos(project);
     });
 
     todoElement.querySelector(".todo-priority").addEventListener("change", () => {
         todo.updatePriority(todoElement.querySelector(".todo-priority").value);
-        showTodos(project);
     });
 
     todoElement.querySelector(".todo-completed-checkbox").addEventListener("click", () => {
         todo.toggleCompleted();
-        showTodos(project);
+        // Solo actualizar el checkbox, no re-renderizar toda la lista
+        todoElement.querySelector(".todo-completed-checkbox").classList.toggle("checked");
     });
 
     todoElement.querySelector(".delete-todo-btn").addEventListener("click", () => {
@@ -97,7 +94,6 @@ function addTodoListeners(todoElement, todo, project) {
         showTodos(project);
     });
 }
-
 
 function showProjects() {
     const content = document.getElementById("content");
@@ -111,6 +107,7 @@ function showProjects() {
         showProjects();
     });
     content.appendChild(addProjectBtn);
+    
     const projectContainer = document.createElement("div");
     projectContainer.innerHTML = ``;
     projectContainer.classList.add("project-container");
@@ -123,19 +120,21 @@ function showProjects() {
             <button class="delete-project-btn">Delete</button>
             <button class="view-todos-btn">View Todos</button>
         `;
+        
         const viewTodosBtn = projectElement.querySelector(".view-todos-btn");
         viewTodosBtn.addEventListener("click", () => {
             showTodos(project, projectElement);
         });
+        
         projectElement.querySelector(".project-name").addEventListener("blur", () => {
-            console.log("Project name changed", project);
             project.updateName(projectElement.querySelector(".project-name").value);
-            showProjects();
         });
+        
         projectElement.querySelector(".delete-project-btn").addEventListener("click", () => {
             admin.deleteProject(project);
             showProjects();
         });
+        
         projectContainer.appendChild(projectElement);
     });
 
