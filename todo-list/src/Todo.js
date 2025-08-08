@@ -18,12 +18,26 @@ export default class Todo {
         this.dueDate = dueDate;
         this.priority = isValidPriority(priority) ? priority : Priority.MEDIUM; // Default a MEDIUM si no es válida
         this.completed = false;
+        this.onChange = null; // Callback para notificar cambios
+    }
+
+    // Método para configurar el callback
+    setOnChange(callback) {
+        this.onChange = callback;
+    }
+
+    // Método para notificar cambios
+    notifyChange() {
+        if (this.onChange) {
+            this.onChange();
+        }
     }
 
     // Métodos para actualizar propiedades del TODO
     updatePriority(newPriority) {
         if (isValidPriority(newPriority)) {
             this.priority = newPriority;
+            this.notifyChange();
         } else {
             throw new Error(`Invalid priority: ${newPriority}. Must be one of: ${Object.values(Priority).join(', ')}`);
         }
@@ -31,18 +45,22 @@ export default class Todo {
 
     updateTitle(newTitle) {
         this.title = newTitle;
+        this.notifyChange();
     }
 
     updateDescription(newDescription) {
         this.description = newDescription;
+        this.notifyChange();
     }
 
     updateDueDate(newDueDate) {
         this.dueDate = newDueDate;
+        this.notifyChange();
     }
 
     toggleCompleted() {
         this.completed = !this.completed;
+        this.notifyChange();
     }
 
     // Método para actualizar múltiples propiedades a la vez
@@ -52,5 +70,6 @@ export default class Todo {
         if (newData.dueDate !== undefined) this.dueDate = newData.dueDate;
         if (newData.priority !== undefined) this.updatePriority(newData.priority);
         if (newData.completed !== undefined) this.completed = newData.completed;
+        this.notifyChange();
     }
 }

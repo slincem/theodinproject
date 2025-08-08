@@ -4,10 +4,13 @@ export default class Project {
     constructor(name) {
         this.name = name;
         this.todos = [];
+        this.onChange = null; // Callback para notificar cambios
     }
 
     addTodo(todo) {
         this.todos.push(todo);
+        // Configurar el callback del todo para que notifique al proyecto
+        todo.setOnChange(() => this.notifyChange());
         this.notifyChange();
     }
 
@@ -26,6 +29,16 @@ export default class Project {
 
     updateName(name) {
         this.name = name;
+        this.notifyChange();
+    }
+
+    // Método para configurar el callback
+    setOnChange(callback) {
+        this.onChange = callback;
+        // Configurar callbacks para todos los todos existentes
+        this.todos.forEach(todo => {
+            todo.setOnChange(() => this.notifyChange());
+        });
     }
 
     notifyChange() {
@@ -33,5 +46,4 @@ export default class Project {
             this.onChange();
         }
     }
-
 }

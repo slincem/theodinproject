@@ -14,17 +14,14 @@ export class StorageService {
 
     static loadProjects() {
         try {
-            const projects = localStorage.getItem(this.STORAGE_KEY);
-            console.log(projects);
-            if (!projects) return [];
+            const projectsData = localStorage.getItem(this.STORAGE_KEY);
+            console.log(projectsData);
+            if (!projectsData) return [];
             
-            const projectsArray = JSON.parse(projects);
+            const projectsArray = JSON.parse(projectsData);
             console.log(projectsArray);
             return projectsArray.map(project => {
                 const newProject = new Project(project.name);
-                newProject.onChange = () => {
-                    this.saveProjects(projects);
-                };
                 newProject.todos = project.todos.map(todo => {
                     const newTodo = new Todo(todo.title, 
                         todo.description, 

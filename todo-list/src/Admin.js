@@ -3,13 +3,15 @@ import { StorageService } from "./StorageService.js";
 export default class Admin {
     constructor() {
         this.projects = StorageService.loadProjects();
+        // Configurar callbacks para todos los proyectos cargados
+        this.projects.forEach(project => {
+            project.setOnChange(() => this.saveToStorage());
+        });
     }
 
     addProject(project) {
         this.projects.push(project);
-        project.onChange = () => {
-            this.saveToStorage();
-        };
+        project.setOnChange(() => this.saveToStorage());
         this.saveToStorage();
     }
 
@@ -23,7 +25,7 @@ export default class Admin {
     }
 
     updateProjectName(project, name) {
-        project.updateProjectName(name);
+        project.updateName(name);
         this.saveToStorage();
     }
 
