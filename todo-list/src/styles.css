@@ -1,0 +1,918 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    color: #333;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+main {
+    padding: 20px;
+    min-height: calc(100vh - 140px);
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    transition: all 0.5s ease;
+}
+
+/* Estilos para las cards de proyectos */
+.project-container {
+    width: 100%;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.5s ease;
+}
+
+.project-container h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Grid de proyectos */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* Cards individuales de proyecto */
+.project-item {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-left: 5px solid #667eea;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.project-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-left-color: #764ba2;
+}
+
+.project-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.project-item:hover::before {
+    transform: scaleX(1);
+}
+
+.project-item h2 {
+    color: #333;
+    font-size: 1.5rem;
+    margin: 0 0 15px 0;
+    font-weight: 600;
+    position: relative;
+}
+
+.project-item h2::after {
+    content: '📁';
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
+/* Botón View Todos */
+.view-todos-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.view-todos-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.view-todos-btn:hover::before {
+    left: 100%;
+}
+
+.view-todos-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.view-todos-btn:active {
+    transform: translateY(0);
+}
+
+/* Botón Back */
+.back-btn {
+    background: linear-gradient(45deg, #6c757d, #495057);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-btn::before {
+    content: '←';
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.back-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+    background: linear-gradient(45deg, #495057, #343a40);
+}
+
+.back-btn:hover::before {
+    transform: translateX(-3px);
+}
+
+.back-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
+}
+
+.back-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.back-btn:hover::after {
+    left: 100%;
+}
+
+/* Transiciones de pantalla */
+.screen-transition {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.5s ease;
+}
+
+.screen-transition.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.screen-transition.hide {
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+/* Contenedor de TODOs con transición */
+.todos-screen {
+    width: 100%;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.5s ease;
+}
+
+.todos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.todos-header h2 {
+    color: #333;
+    font-size: 2rem;
+    margin: 0;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.todo-container {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.todo-item {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-left: 5px solid #ddd;
+    position: relative;
+    overflow: hidden;
+}
+
+.todo-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Checkbox de completed en esquina superior derecha */
+.todo-completed-checkbox {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.todo-completed-checkbox:hover {
+    border-color: #667eea;
+    transform: scale(1.1);
+}
+
+.todo-completed-checkbox.checked {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    border-color: #27ae60;
+    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+}
+
+.todo-completed-checkbox.checked::after {
+    content: '✓';
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.todo-completed-checkbox:active {
+    transform: scale(0.95);
+}
+
+/* Ajustar el padding del todo-item para el checkbox */
+.todo-item {
+    padding-top: 35px; /* Más espacio arriba para el checkbox */
+}
+
+.todo-item h2 {
+    color: #333;
+    font-size: 1.4rem;
+    margin: 0 0 15px 0;
+    font-weight: 600;
+    padding-right: 40px; /* Espacio para el checkbox */
+}
+
+.todo-item p {
+    color: #666;
+    margin: 8px 0;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.todo-item p:nth-child(2) {
+    color: #555;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.todo-item p:nth-child(3) {
+    color: #888;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.todo-item p:nth-child(3)::before {
+    content: "📅";
+}
+
+.todo-item p:nth-child(4) {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 10px 0;
+}
+
+/* Estilos para diferentes prioridades */
+.todo-item p:nth-child(4):contains("High") {
+    background: #e74c3c;
+    color: white;
+}
+
+.todo-item p:nth-child(4):contains("Medium") {
+    background: #f39c12;
+    color: white;
+}
+
+.todo-item p:nth-child(4):contains("Low") {
+    background: #27ae60;
+    color: white;
+}
+
+/* Botones de acción */
+.todo-item button {
+    padding: 8px 16px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.todo-item button:first-of-type {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    color: white;
+}
+
+.todo-item button:nth-of-type(2) {
+    background: linear-gradient(45deg, #3498db, #5dade2);
+    color: white;
+}
+
+.todo-item button:last-of-type {
+    background: linear-gradient(45deg, #e74c3c, #ec7063);
+    color: white;
+}
+
+.todo-item button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.todo-item button:active {
+    transform: translateY(0);
+}
+
+/* Estado completado mejorado */
+.todo-item.completed {
+    opacity: 0.8;
+    background: #f8f9fa;
+    border-left-color: #27ae60;
+}
+
+.todo-item.completed h2 {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.todo-item.completed .todo-completed-checkbox {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    border-color: #27ae60;
+}
+
+.todo-item.completed .todo-completed-checkbox::after {
+    content: '✓';
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Campos editables inline */
+.todo-item input,
+.todo-item textarea,
+.todo-item select {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: inherit;
+    font-family: inherit;
+    background: transparent;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 8px 0;
+    outline: none;
+}
+
+.todo-item input:focus,
+.todo-item textarea:focus,
+.todo-item select:focus {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.05);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Estilos específicos para cada tipo de campo */
+.todo-item input[type="text"] {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #eee;
+}
+
+.todo-item input[type="text"]:focus {
+    border-bottom-color: #667eea;
+}
+
+.todo-item textarea {
+    min-height: 60px;
+    resize: vertical;
+    font-style: italic;
+    color: #555;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.todo-item textarea:focus {
+    background: rgba(102, 126, 234, 0.05);
+    border-color: #667eea;
+}
+
+.todo-item input[type="date"] {
+    color: #888;
+    font-size: 0.9rem;
+    border: 2px solid transparent;
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.todo-item input[type="date"]:focus {
+    background: rgba(102, 126, 234, 0.05);
+    border-color: #667eea;
+}
+
+.todo-item select {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: auto;
+    background: white;
+    border: 2px solid #ddd;
+    cursor: pointer;
+}
+
+.todo-item select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Estados de edición */
+.todo-item.editing {
+    background: rgba(102, 126, 234, 0.02);
+    border-left-color: #667eea;
+}
+
+.todo-item.editing .todo-completed-checkbox {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Botones de acción en modo edición */
+.todo-item.editing .btn-save {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    color: white;
+}
+
+.todo-item.editing .btn-cancel {
+    background: linear-gradient(45deg, #e74c3c, #ec7063);
+    color: white;
+    margin-left: 8px;
+}
+
+.todo-item.editing .btn-edit {
+    display: none;
+}
+
+/* Placeholder styles */
+.todo-item input::placeholder,
+.todo-item textarea::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .project-container,
+    .todos-screen {
+        margin: 10px;
+        padding: 20px;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .todo-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .todo-item {
+        padding: 20px;
+    }
+    
+    .project-container h1,
+    .todos-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .project-item {
+        padding: 20px;
+    }
+}
+
+footer {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    color: #333;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive para campos editables */
+@media (max-width: 768px) {
+    .todo-item input[type="text"] {
+        font-size: 1.2rem;
+    }
+    
+    .todo-item textarea {
+        min-height: 50px;
+    }
+    
+    .todo-item select {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+    }
+}
+
+/* Botón Add Todo */
+.add-todo-btn {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.add-todo-btn::before {
+    content: '+';
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.add-todo-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.add-todo-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+    background: linear-gradient(45deg, #2ecc71, #27ae60);
+}
+
+.add-todo-btn:hover::after {
+    left: 100%;
+}
+
+.add-todo-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+}
+
+.add-todo-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2);
+}
+
+/* Responsive para el botón Add Todo */
+@media (max-width: 768px) {
+    .add-todo-btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Botón Add Project */
+.add-project-btn {
+    background: linear-gradient(45deg, #9b59b6, #8e44ad);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.add-project-btn::before {
+    content: '+';
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.add-project-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.add-project-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(155, 89, 182, 0.4);
+    background: linear-gradient(45deg, #8e44ad, #9b59b6);
+}
+
+.add-project-btn:hover::after {
+    left: 100%;
+}
+
+.add-project-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(155, 89, 182, 0.3);
+}
+
+.add-project-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.2);
+}
+
+/* Input para nombre de proyecto */
+.project-name {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    outline: none;
+    border-bottom: 2px solid #eee;
+}
+
+.project-name:focus {
+    border-bottom-color: #9b59b6;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.1);
+}
+
+.project-name:hover {
+    background: rgba(255, 255, 255, 1);
+    border-bottom-color: #8e44ad;
+}
+
+/* Botón Delete Project */
+.delete-project-btn {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+    position: relative;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.delete-project-btn::before {
+    content: '🗑️';
+    margin-right: 5px;
+}
+
+.delete-project-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.delete-project-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+    background: linear-gradient(45deg, #c0392b, #e74c3c);
+}
+
+.delete-project-btn:hover::after {
+    left: 100%;
+}
+
+.delete-project-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+}
+
+.delete-project-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+}
+
+/* Mejorar estilos de project-item para acomodar nuevos elementos */
+.project-item {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-left: 5px solid #9b59b6;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.project-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-left-color: #8e44ad;
+}
+
+.project-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(45deg, #9b59b6, #8e44ad);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.project-item:hover::before {
+    transform: scaleX(1);
+}
+
+/* Contenedor de botones en project-item */
+.project-item .project-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+/* Responsive para nuevos elementos */
+@media (max-width: 768px) {
+    .add-project-btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+    
+    .project-name {
+        font-size: 1rem;
+        padding: 10px 14px;
+    }
+    
+    .delete-project-btn {
+        padding: 6px 12px;
+        font-size: 0.7rem;
+    }
+    
+    .project-item {
+        padding: 20px;
+        gap: 10px;
+    }
+}
